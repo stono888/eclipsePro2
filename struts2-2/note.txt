@@ -1,0 +1,25 @@
+1. VS自实现：
+
+1）. 搭建Struts2的开发环境
+
+2）. 不需要显示的定义Filter，而使用的是struts2的配置文件。
+
+3）. details.jsp比先前变得简单了。
+${requestScope.prodec.productName}->${productName}
+
+4）. 步骤：
+I. 由product-input.action转到/WEB-INF/pages/input.jsp
+   在struts2中配置一个action
+   		<action name="product-input">
+			<result>/WEB-INF/pages/input.jsp</result>
+		</action>
+
+II. 由input.jsp页面的action：product-save.action到Product's save,
+再到/WEB-INF/pages/details.jsp
+
+		<action name="product-save" class="com.stono.struts2.helloworld.Product"
+			method="save">
+			<result name="details">/WEB-INF/pages/details.jsp</result>
+		</action>
+		在product中定义一个save方法，并且返回details。
+		
