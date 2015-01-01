@@ -7,16 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	ProductId:${productId}
-	<br><br>
-
-	ProductName:<%=request.getAttribute("productName") %>
-	<br><br>
-	ProductDesc:${productDesc}
-	<br><br>
-	ProductPrice:${productPrice}
-	<br><br>
-	<br><br>
-	<%=request %>
+just test
 </body>
 </html>

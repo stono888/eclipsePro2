@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="product-save.action" method="post">
-	productName:<input type="text" name="productName">
+	productName:<input type="text" name="productName2">
 	<br><br>
 	productDesc:<input type="text" name="productDesc">
 	<br><br>

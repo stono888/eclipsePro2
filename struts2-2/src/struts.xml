@@ -5,17 +5,30 @@
 
 <struts>
 	<!-- package:包：struts2使用package来组织模块， name 属性：必须。用于其它的包引用当前的包； extends： 
-		当前的包继承哪个包，继承的，即可以继承其手中的所有的配置，通常情况下继承struts-default -->
-	<package name="helloWorld" extends="struts-default">
-		<!-- 配置一个action：一个struts2的请求就是一个action name:对应一个struts2的请求名字（或者对应servletPath，但去除/和扩展名），不包含扩展名 
+		当前的包继承哪个包，继承的，即可以继承其手中的所有的配置，通常情况下继承struts-default struts-default 这个包在struts-default.xml文件中定义 
+		namespace可选，如果它没有给出，则以/为默认值； 若namespace有一个非默认值，则要想调用这个包里的Action， 就必须把这个属性所定义的命名空间添加到有关的URI字符串里； 
+		http://localhost:8080/contextPath/namespace/actionName.action -->
+	<package name="helloWorld" extends="struts-default" namespace="/" >
+		<!-- 配置一个action：一个struts2的请求就是一个action name:对应一个struts2的请求名字（或者对应servletPath，但去除/和扩展名），不包含扩展名
+		class的默认值为：com.opensymphony.xwork2.ActionSupport
+		method的默认值是：execute 
 			result:结果。 -->
-		<action name="product-input">
-			<result>/WEB-INF/pages/input.jsp</result>
+		<action name="product-input" class="com.opensymphony.xwork2.ActionSupport"
+			method="execute">
+			<!-- 
+				result：结果，表示action方法执行后可能返回的结果；所以一个action节点可能有
+				多个result子节点使用name区分；
+				name：标识一个result。和action方法的返回值对应。默认值是success；
+				type:表示结果的类型，默认值为dispatcher。（转发的结果）
+			 -->
+			<result name="success" type="dispatcher">/WEB-INF/pages/input.jsp</result>
 		</action>
 		<action name="product-save" class="com.stono.struts2.helloworld.Product"
 			method="save">
 			<result name="details">/WEB-INF/pages/details.jsp</result>
 		</action>
-
+		<action name="test" class="com.stono.struts2.helloworld.Product" method="test">
+			<result name="success">/WEB-INF/pages/test.jsp</result>
+		</action>
 	</package>
 </struts>

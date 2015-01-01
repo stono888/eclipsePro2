@@ -7,6 +7,7 @@ public class Product {
 	private double productPrice;
 	
 	public Product() {
+		System.out.println("Product constructor......");
 	}
 	public Product(String productName, String productDesc, double productPrice) {
 		this.productName = productName;
@@ -59,4 +60,8 @@ public class Product {
 		return "details";
 	}
 	
+	public String test(){
+		System.out.println("test");
+		return "success";
+	}
 }
