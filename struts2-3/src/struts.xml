@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<!-- 配置Struts可以受理的请求的扩展名 -->
+	<constant name="struts.action.extension" value="action,do,"></constant>
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="TestActionContext" class="com.stono.struts2.action.TestActionContextAction">
+			<result>/test-actionContext.jsp</result>
+		</action>
+		<action name="TestAware" class="com.stono.struts2.action.TestAwareAction">
+			<result>/test-aware.jsp</result>
+		</action>
+		<action name="TestServletAction"
+			class="com.stono.struts2.action.TestServletActionContextAction">
+			<result>/success.jsp</result>
+		</action>
+		<action name="TestServletAwareAction" class="com.stono.struts2.action.TestServletAwareAction">
+			<result>/success2.jsp</result>
+		</action>
+		<action name="Login-ui">
+			<result>/login.jsp</result>
+		</action>
+		<action name="user-login" class="com.stono.struts2.action.UserAction">
+			<result name="login-success">/login-success.jsp</result>
+		</action>
+		<action name="Logout" class="com.stono.struts2.action.UserAction"
+			method="logout">
+			<result name="logout-success">/login.jsp</result>
+		</action>
+		<action name="testActionSupport">
+			<result>/testActionSupport.jsp</result>
+		</action>
+		<action name="testResult" class="com.stono.struts2.action.TestResultAction">
+			<result name="success" type="dispatcher">/success.jsp </result>
+			<result name="login" type="redirect">/login.jsp </result>
+			<!-- 重定向到一个Action -->
+			<!-- 
+			<result name="index" type="redirectAction">
+				<param name="actionName">testAction</param>
+				<param name="namespace">/stono</param>
+			 </result>
+			 -->
+			 <!-- 通过redirect的响应类型也可以辩解的实现redirectAction的功能 -->
+			 <result name="index" type="redirect">/stono/testAction.do</result>
+			 <!-- 转发到一个Action -->
+			<result name="test" type="chain">
+				<param name="actionName">testAction</param>
+				<param name="namespace">/stono</param>
+			</result>
+			 <!-- 不能通过type=dispatcher转发到一个Action -->
+			 <!-- 
+			 <result name="test">/stono/testAction</result>
+			  -->
+			
+		</action>
+	</package>
+	
+	<package name="testPackage" namespace="/stono" extends="struts-default">
+		<action name="testAction" class="com.stono.struts2.action.TestAction">
+			<result>/success.jsp</result>
+		</action>
+	</package>
+
+</struts>
