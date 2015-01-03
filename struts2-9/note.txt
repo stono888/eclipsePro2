@@ -1,0 +1,41 @@
+1. 文件的上传
+1). 表单需要注意的3点
+2). struts2的文件上传实际上使用的是Commons FileUpload组件，所以需要导入
+commons-fileupload-1.3.jar
+commons-io.2.0.1.jar
+3). Struts2 进行文件上传需要使用FileUpload拦截器
+4). 基本的文件上传：直接在Action中定义如下3个属性，并提供对应的getter和setter；
+
+	private File [fileFieldName];
+	private String pptContentType;
+	private String pptFileName;
+5). 使用IO流进行文件上传
+6). 一次传多个文件怎么办？
+	若传递多个文件，则上述的3个属性，可以改为list类型；多个文件域的name属性值需要一致。
+7). 可以对上传的文件进行限制么？例如扩展名，内容类型，上传文件的大小？若可以，出错显示什么消息？消息可以定制么？
+	可以的！
+	可以通过配置FileUploadInterceptor拦截器的参数的方式来进行限制；
+	maximumSize()-默认最大为2M。上传单个文件的最大值；
+	allowedType-允许的类型，多个使用逗号分隔；
+	allowedExtensions-允许的多个扩展名，多个使用逗号分隔；
+	注意：在org.apache.struts2下的default.properties中有对上传的文件总的大小的限制，可以使用常量的方式来修改该限制
+	struts.multipart.maxSize = 2097152
+	定制错误消息。可以在国际化资源文件中定义如下的消息：
+	struts.messages.error.uploading -文件上传出错的消息 
+	struts.messages.error.file.too.large - 文件超过最大值的消息 
+	struts.messages.error.content.type.not.allowed - 文件内容类型不合法的消息 
+	struts.messages.error.file.extension.not.allowed - 文件扩展名不合法的消息 
+	问题：此种方式定制的消息并不完善。可以参考struts-messages.properties，可以提供更多的定制信息
+2. 文件的下载
+1). Struts2中使用type="stream"的result进行下载即可
+2). 具体细节参考doc文档
+3). 参数如下：
+contentType - 结果类型
+contentLength - 文件长度
+contentDisposition - 设定Content-Disposition响应头，该响应头指定响应是一个文件下载类型；一般取值为attachment;filename="document.pdf".
+inputName - 指定文件输入流的getter定义的那个属性的名字，默认为inputStream 
+bufferSize - 缓存的大小，默认为1024
+allowCaching 是否允许使用缓存
+contentCharSet 文件下载的字符集
+4). 以上参数可以在Action中以getter方法的方式提供！
+	
